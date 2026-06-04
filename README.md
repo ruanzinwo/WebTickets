@@ -95,11 +95,16 @@ Este projeto utiliza a licença MIT.
 
 ## Imagens do Projeto
 
-<img width="1920" height="1032" alt="screenshotstela-inicial png" src="https://github.com/user-attachments/assets/2beb2294-a560-474d-95ec-53de508e2bc2" />
-<img width="1914" height="1040" alt="screenshotsrelatorio2 png" src="https://github.com/user-attachments/assets/d6a892fe-2a80-4ab3-a2c5-601ae2d7a1ce" />
-<img width="1920" height="1038" alt="screenshotsrelatorio png" src="https://github.com/user-attachments/assets/63346a36-6fbc-4c56-9a49-f2b311b462f6" />
-<img width="1920" height="1035" alt="screenshotspainel-senhas png" src="https://github.com/user-attachments/assets/99f002c1-756b-4406-bc79-731881a594e3" />
-<img width="1920" height="1040" alt="screenshotspainel-senhas5 png" src="https://github.com/user-attachments/assets/e0a21706-23d2-45fc-9499-d052393c3d90" />
-<img width="1920" height="1043" alt="screenshotssenhas-relatorio png" src="https://github.com/user-attachments/assets/89d95e5f-a6f5-40bd-91e1-bea55a7f5d78" />
-
+### Tela Principal
+<img width="1920" height="1038" alt="tela-principal png" src="https://github.com/user-attachments/assets/fa5f6a00-e026-4772-b71d-cfb3e0a07996" />
+### Emissão de Senhas
+<img width="1920" height="1030" alt="emissao-senhas png" src="https://github.com/user-attachments/assets/cda97ccf-20ad-4333-bcd1-2407dcc80e48" />
+### Painel de Atendimento
+<img width="1920" height="1038" alt="painel-atendimento png" src="https://github.com/user-attachments/assets/c96d1bd8-47c5-435a-8b88-005afa9c0648" />
+### Relatórios
+<img width="1920" height="1030" alt="relatorios png" src="https://github.com/user-attachments/assets/80774ebe-dfae-4a95-8a13-8646bf7d2b07" />
+### ENCERRAR EXPEDIENTE
+<img width="1920" height="1080" alt="expediente-encerrado png" src="https://github.com/user-attachments/assets/6c6530a6-44bb-49a3-ae3b-f9a21d0787b3" />
+### LIMPAR DADOS
+<img width="1920" height="1040" alt="dados-apagados png" src="https://github.com/user-attachments/assets/96c198e2-b197-4229-b6ba-3ebb8c0886b5" />
 
