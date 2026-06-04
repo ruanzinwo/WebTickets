@@ -80,7 +80,7 @@ Configure o arquivo `.env` com os dados do seu MySQL.
 
 ```bash
 npm install
-ionic serve
+ionic.cmd serve
 ```
 
 Acesse:
