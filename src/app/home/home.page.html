@@ -1,12 +1,187 @@
-<ion-header><ion-toolbar color="primary"><ion-title>WebTickets</ion-title></ion-toolbar></ion-header>
-<ion-content><div class="container">
-<div class="hero"><div><h1>Sistema de Controle de Atendimento</h1><p>Laboratório Médico - Senhas SP, SG e SE</p></div><div class="status-box"><ion-badge [color]="status?.expedienteAberto ? 'success' : 'danger'">{{ status?.expedienteAberto ? 'Expediente aberto' : 'Expediente fechado' }}</ion-badge><ion-item lines="none"><ion-checkbox slot="start" [(ngModel)]="ignorarExpediente"></ion-checkbox><ion-label>Modo teste</ion-label></ion-item></div></div>
-<ion-alert [isOpen]="!!mensagem" header="Sucesso" [message]="mensagem" (didDismiss)="mensagem=''" buttons="OK"></ion-alert><ion-alert [isOpen]="!!erro" header="Erro" [message]="erro" (didDismiss)="erro=''" buttons="OK"></ion-alert>
-<ion-grid><ion-row>
-<ion-col size="12" size-lg="4"><ion-card><ion-card-header><ion-card-title>AC - Totem do Cliente</ion-card-title><ion-card-subtitle>Emissão de senhas</ion-card-subtitle></ion-card-header><ion-card-content><ion-button expand="block" (click)="emitirSenha('SP')">Emitir SP - Prioritária</ion-button><ion-button expand="block" color="medium" (click)="emitirSenha('SG')">Emitir SG - Geral</ion-button><ion-button expand="block" color="tertiary" (click)="emitirSenha('SE')">Emitir SE - Exames</ion-button></ion-card-content></ion-card></ion-col>
-<ion-col size="12" size-lg="4"><ion-card><ion-card-header><ion-card-title>AA - Atendente</ion-card-title><ion-card-subtitle>Chamada por prioridade</ion-card-subtitle></ion-card-header><ion-card-content><ion-item><ion-label position="stacked">Guichê</ion-label><ion-input type="number" [(ngModel)]="guiche"></ion-input></ion-item><ion-button expand="block" (click)="chamarProxima()">Chamar Próxima Senha</ion-button><ion-button expand="block" color="danger" (click)="encerrarExpediente()">Encerrar Expediente</ion-button></ion-card-content></ion-card></ion-col>
-<ion-col size="12" size-lg="4"><ion-card><ion-card-header><ion-card-title>AS - Sistema</ion-card-title><ion-card-subtitle>Fila aguardando</ion-card-subtitle></ion-card-header><ion-card-content><div class="fila"><div><span>SP</span><strong>{{ fila.SP || 0 }}</strong></div><div><span>SE</span><strong>{{ fila.SE || 0 }}</strong></div><div><span>SG</span><strong>{{ fila.SG || 0 }}</strong></div></div><ion-button expand="block" color="dark" (click)="limparDados()">Limpar dados de teste</ion-button></ion-card-content></ion-card></ion-col>
-</ion-row></ion-grid>
-<ion-card class="painel"><ion-card-header><ion-card-title>Painel - Últimas 5 Senhas Chamadas</ion-card-title></ion-card-header><ion-card-content><p *ngIf="painel.length===0">Nenhuma senha chamada ainda.</p><div class="senhas"><div class="senha" *ngFor="let item of painel"><span>{{ item.codigo }}</span><small>Guichê {{ item.guiche }}</small></div></div></ion-card-content></ion-card>
-<ion-card *ngIf="relatorio"><ion-card-header><ion-card-title>Relatório Resumido</ion-card-title></ion-card-header><ion-card-content><div class="resumo"><div>Emitidas <strong>{{ relatorio.geral.total_emitidas || 0 }}</strong></div><div>Atendidas <strong>{{ relatorio.geral.total_atendidas || 0 }}</strong></div><div>Descartadas <strong>{{ relatorio.geral.total_descartadas || 0 }}</strong></div><div>TM Geral <strong>{{ relatorio.geral.tempo_medio_geral || 0 }} min</strong></div></div><h2>Quantitativo por prioridade</h2><div class="table-wrap"><table><thead><tr><th>Tipo</th><th>Emitidas</th><th>Atendidas</th><th>Descartadas</th><th>TM</th></tr></thead><tbody><tr *ngFor="let p of relatorio.porTipo"><td>{{p.tipo}}</td><td>{{p.emitidas||0}}</td><td>{{p.atendidas||0}}</td><td>{{p.descartadas||0}}</td><td>{{p.tempo_medio||0}} min</td></tr></tbody></table></div><h2>Relatório detalhado</h2><div class="table-wrap"><table><thead><tr><th>Senha</th><th>Tipo</th><th>Emissão</th><th>Atendimento</th><th>Guichê</th><th>Status</th><th>TM</th></tr></thead><tbody><tr *ngFor="let s of relatorio.detalhes"><td>{{s.codigo}}</td><td>{{s.tipo}}</td><td>{{s.data_emissao | date:'short'}}</td><td>{{s.data_atendimento ? (s.data_atendimento | date:'short') : '-'}}</td><td>{{s.guiche||'-'}}</td><td>{{s.status}}</td><td>{{s.tempo_atendimento ? s.tempo_atendimento + ' min' : '-'}}</td></tr></tbody></table></div></ion-card-content></ion-card>
-</div></ion-content>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>WebTickets</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1>Sistema de Controle de Atendimento</h1>
+        <p>Laboratório Médico - Senhas SP, SG e SE</p>
+      </div>
+
+      <div class="status-box">
+        <ion-badge [color]="status?.expedienteAberto ? 'success' : 'danger'">
+          {{ status?.expedienteAberto ? 'Expediente aberto' : 'Expediente fechado' }}
+        </ion-badge>
+
+        <ion-item lines="none">
+          <ion-checkbox slot="start" [(ngModel)]="ignorarExpediente"></ion-checkbox>
+          <ion-label>Modo teste</ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-alert [isOpen]="!!mensagem" header="Sucesso" [message]="mensagem" (didDismiss)="mensagem=''" buttons="OK"></ion-alert>
+    <ion-alert [isOpen]="!!erro" header="Erro" [message]="erro" (didDismiss)="erro=''" buttons="OK"></ion-alert>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>AC - Totem do Cliente</ion-card-title>
+              <ion-card-subtitle>Emissão de senhas</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button expand="block" (click)="emitirSenha('SP')">Emitir SP - Prioritária</ion-button>
+              <ion-button expand="block" color="medium" (click)="emitirSenha('SG')">Emitir SG - Geral</ion-button>
+              <ion-button expand="block" color="tertiary" (click)="emitirSenha('SE')">Emitir SE - Exames</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>AA - Atendente</ion-card-title>
+              <ion-card-subtitle>Chamada por prioridade</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="stacked">Guichê</ion-label>
+                <ion-input type="number" [(ngModel)]="guiche"></ion-input>
+              </ion-item>
+
+              <ion-button expand="block" (click)="chamarProxima()">Chamar Próxima Senha</ion-button>
+              <ion-button expand="block" color="danger" (click)="encerrarExpediente()">Encerrar Expediente</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>AS - Sistema</ion-card-title>
+              <ion-card-subtitle>Fila aguardando</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="fila">
+                <div><span>SP</span><strong>{{ fila.SP || 0 }}</strong></div>
+                <div><span>SE</span><strong>{{ fila.SE || 0 }}</strong></div>
+                <div><span>SG</span><strong>{{ fila.SG || 0 }}</strong></div>
+              </div>
+
+              <ion-button expand="block" color="dark" (click)="limparDados()">Limpar dados de teste</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card class="painel">
+      <ion-card-header>
+        <ion-card-title>Painel - Últimas 5 Senhas Chamadas</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p *ngIf="painel.length === 0">Nenhuma senha chamada ainda.</p>
+
+        <div class="senhas">
+          <div class="senha" *ngFor="let item of painel">
+            <span>{{ item.codigo }}</span>
+            <small>Guichê {{ item.guiche }}</small>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="relatorio">
+      <ion-card-header>
+        <ion-card-title>Relatórios</ion-card-title>
+        <ion-card-subtitle>Geral, diário e mensal</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-segment [(ngModel)]="tipoRelatorio" (ionChange)="carregarRelatorio()">
+          <ion-segment-button value="geral">
+            <ion-label>Geral</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="diario">
+            <ion-label>Diário</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="mensal">
+            <ion-label>Mensal</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div class="resumo">
+          <div>Emitidas <strong>{{ relatorio.geral.total_emitidas || 0 }}</strong></div>
+          <div>Atendidas <strong>{{ relatorio.geral.total_atendidas || 0 }}</strong></div>
+          <div>Descartadas <strong>{{ relatorio.geral.total_descartadas || 0 }}</strong></div>
+          <div>TM Geral <strong>{{ relatorio.geral.tempo_medio_geral || 0 }} min</strong></div>
+        </div>
+
+        <h2>Quantitativo por prioridade</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Emitidas</th>
+                <th>Atendidas</th>
+                <th>Descartadas</th>
+                <th>TM</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let p of relatorio.porTipo">
+                <td>{{ p.tipo }}</td>
+                <td>{{ p.emitidas || 0 }}</td>
+                <td>{{ p.atendidas || 0 }}</td>
+                <td>{{ p.descartadas || 0 }}</td>
+                <td>{{ p.tempo_medio || 0 }} min</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Relatório detalhado</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Senha</th>
+                <th>Tipo</th>
+                <th>Emissão</th>
+                <th>Atendimento</th>
+                <th>Guichê</th>
+                <th>Status</th>
+                <th>TM</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let s of relatorio.detalhes">
+                <td>{{ s.codigo }}</td>
+                <td>{{ s.tipo }}</td>
+                <td>{{ s.data_emissao | date:'short' }}</td>
+                <td>{{ s.data_atendimento ? (s.data_atendimento | date:'short') : '-' }}</td>
+                <td>{{ s.guiche || '-' }}</td>
+                <td>{{ s.status }}</td>
+                <td>{{ s.tempo_atendimento ? s.tempo_atendimento + ' min' : '-' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
