@@ -99,6 +99,7 @@ Este projeto utiliza a licença MIT.
 <img width="1914" height="1040" alt="screenshotsrelatorio2 png" src="https://github.com/user-attachments/assets/d6a892fe-2a80-4ab3-a2c5-601ae2d7a1ce" />
 <img width="1920" height="1038" alt="screenshotsrelatorio png" src="https://github.com/user-attachments/assets/63346a36-6fbc-4c56-9a49-f2b311b462f6" />
 <img width="1920" height="1035" alt="screenshotspainel-senhas png" src="https://github.com/user-attachments/assets/99f002c1-756b-4406-bc79-731881a594e3" />
-
+<img width="1920" height="1040" alt="screenshotspainel-senhas5 png" src="https://github.com/user-attachments/assets/e0a21706-23d2-45fc-9499-d052393c3d90" />
+<img width="1920" height="1043" alt="screenshotssenhas-relatorio png" src="https://github.com/user-attachments/assets/89d95e5f-a6f5-40bd-91e1-bea55a7f5d78" />
 
 
