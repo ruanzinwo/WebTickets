@@ -1,39 +1,48 @@
-WebTickets
+# WebTickets
 
 Sistema de Controle de Atendimento desenvolvido com Ionic Angular, Node.js e MySQL.
 
-Equipe
-Ruan Miguel Correia dos Santos — 01839500
-Samuel Feliciano da Silva — 01792472
-Gabriel Vieira de Lima — 01801956
-Vinicius Vicente Ferreira — 01799643
-Arthur Alexandre Montenegro Silvestre — 01796891
-Sobre o Projeto
+## Equipe
+
+* Ruan Miguel Correia dos Santos — 01839500
+* Samuel Feliciano da Silva — 01792472
+* Gabriel Vieira de Lima — 01801956
+* Vinicius Vicente Ferreira — 01799643
+* Arthur Alexandre Montenegro Silvestre — 01796891
+
+## Sobre o Projeto
 
 O WebTickets é um sistema de gerenciamento de filas para laboratórios médicos, permitindo a emissão, atendimento e acompanhamento de senhas de forma organizada.
 
 O sistema trabalha com três tipos de senhas:
 
-SP — Senha Prioritária
-SG — Senha Geral
-SE — Senha para Exames
-Funcionalidades
-Emissão de senhas SP, SG e SE
-Controle de prioridade de atendimento
-Painel com as últimas 5 senhas chamadas
-Controle de guichês
-Relatório resumido
-Relatório detalhado
-Integração com banco de dados MySQL
-Interface responsiva utilizando Ionic Angular
-Tecnologias Utilizadas
-Ionic
-Angular
-TypeScript
-Node.js
-Express
-MySQL
-Estrutura do Projeto
+* SP — Senha Prioritária
+* SG — Senha Geral
+* SE — Senha para Exames
+
+## Funcionalidades
+
+* Emissão de senhas SP, SG e SE
+* Controle de prioridade de atendimento
+* Painel com as últimas 5 senhas chamadas
+* Controle de guichês
+* Relatório resumido
+* Relatório detalhado
+* Integração com banco de dados MySQL
+* Interface responsiva utilizando Ionic Angular
+
+## Tecnologias Utilizadas
+
+* Ionic
+* Angular
+* TypeScript
+* Node.js
+* Express
+* MySQL
+
+## Estrutura do Projeto
+
+```text
 WebTickets
 ├── backend
 ├── database
@@ -43,31 +52,48 @@ WebTickets
 ├── package.json
 ├── angular.json
 └── ionic.config.json
-Como Executar
-Banco de Dados
+```
+
+## Como Executar
+
+### Banco de Dados
 
 Execute o arquivo:
 
+```text
 database/schema.sql
+```
 
 no MySQL Workbench.
 
-Backend
+### Backend
+
+```bash
 cd backend
 npm install
 node server.js
+```
 
-Configure o arquivo .env com os dados do seu MySQL.
+Configure o arquivo `.env` com os dados do seu MySQL.
 
-Frontend
+### Frontend
+
+```bash
 npm install
 ionic serve
+```
 
 Acesse:
 
+```text
 http://localhost:8100
+```
 
-Imagens do Projeto:
+## Licença
+
+Este projeto utiliza a licença MIT.
+
+## Imagens do Projeto
 
 <img width="1920" height="1032" alt="screenshotstela-inicial png" src="https://github.com/user-attachments/assets/2beb2294-a560-474d-95ec-53de508e2bc2" />
 <img width="1914" height="1040" alt="screenshotsrelatorio2 png" src="https://github.com/user-attachments/assets/d6a892fe-2a80-4ab3-a2c5-601ae2d7a1ce" />
